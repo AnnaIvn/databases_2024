@@ -1,0 +1,225 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Пароль користувача postgres:
+psql (16.1)
+УВАГА: Кодова стор?нка консол? (866) в?др?зняється в?д кодової стор?нки Windows (1251)
+         8-б?тов? символи можуть працювати неправильно. Детальн?ше у розд?л?
+         "Нотатки для користувач?в Windows" у документац?ї psql.
+Введ?ть "help", щоб отримати допомогу.
+
+postgres=# \i d:/pre.sql;
+Active code page: 1251
+                                                       Список баз даних
+ Назва | Власник | Кодування | Постачальник локалі | Порядок сортування | Ctype | Локалізація ICU | ICU Rules | Права доступу
+-------+---------+-----------+---------------------+--------------------+-------+-----------------+-----------+---------------
+(0 рядків)
+
+
+psql:d:/pre.sql:2: попередження: \l: зайвий аргумент "to" проігноровано
+psql:d:/pre.sql:2: попередження: \l: зайвий аргумент "see" проігноровано
+psql:d:/pre.sql:2: попередження: \l: зайвий аргумент "list" проігноровано
+psql:d:/pre.sql:2: попередження: \l: зайвий аргумент "of" проігноровано
+psql:d:/pre.sql:2: попередження: \l: зайвий аргумент "existing" проігноровано
+psql:d:/pre.sql:2: попередження: \l: зайвий аргумент "databases" проігноровано
+psql:d:/pre.sql:3: ПОМИЛКА:  синтаксична помилка в або поблизу "psql"
+РЯДОК 1: psql
+         ^
+                                                                        Список баз даних
+   Назва   | Власник  | Кодування | Постачальник локалі |   Порядок сортування   |         Ctype          | Локалізація ICU | ICU Rules |     Права доступу
+-----------+----------+-----------+---------------------+------------------------+------------------------+-----------------+-----------+-----------------------
+ dvdrental | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           |
+ lab1_wood | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           |
+ postgres  | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           |
+ template0 | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           | =c/postgres          +
+           |          |           |                     |                        |                        |                 |           | postgres=CTc/postgres
+ template1 | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           | =c/postgres          +
+           |          |           |                     |                        |                        |                 |           | postgres=CTc/postgres
+(5 рядків)
+
+
+     Список ролей
+ Ім'я ролі | Атрибути
+-----------+----------
+
+                                      Список ролей
+ Ім'я ролі |                                  Атрибути
+-----------+----------------------------------------------------------------------------
+ postgres  | Суперкористувач, Створити роль, Створити базу даних, Реплікація, Обхід RLC
+ user1     |
+ user2     |
+
+
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Пароль користувача postgres:
+psql (16.1)
+УВАГА: Кодова стор?нка консол? (866) в?др?зняється в?д кодової стор?нки Windows (1251)
+         8-б?тов? символи можуть працювати неправильно. Детальн?ше у розд?л?
+         "Нотатки для користувач?в Windows" у документац?ї psql.
+Введ?ть "help", щоб отримати допомогу.
+
+postgres=# psql \! chcp 1251
+Active code page: 1251
+postgres-# /l
+postgres-# \l
+                                                                        Список баз даних
+   Назва   | Власник  | Кодування | Постачальник локалі |   Порядок сортування   |         Ctype          | Локалізація ICU | ICU Rules |     Права доступу
+-----------+----------+-----------+---------------------+------------------------+------------------------+-----------------+-----------+-----------------------
+ dvdrental | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           |
+ lab1_wood | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           |
+ postgres  | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           |
+ template0 | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           | =c/postgres          +
+           |          |           |                     |                        |                        |                 |           | postgres=CTc/postgres
+ template1 | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           | =c/postgres          +
+           |          |           |                     |                        |                        |                 |           | postgres=CTc/postgres
+(5 рядків)
+
+
+postgres-# \du
+                                      Список ролей
+ Ім'я ролі |                                  Атрибути
+-----------+----------------------------------------------------------------------------
+ postgres  | Суперкористувач, Створити роль, Створити базу даних, Реплікація, Обхід RLC
+ user1     |
+ user2     |
+
+
+postgres-# \c lab1_wood;
+Ви тепер під'єднані до бази даних "lab1_wood" як користувач "postgres".
+lab1_wood-# GRANT USAGE ON SCHEMA wood_types TO user1;
+ПОМИЛКА:  синтаксична помилка в або поблизу "psql"
+РЯДОК 1: psql
+         ^
+lab1_wood=# GRANT SELECT ON ALL TABLES IN SCHEMA wood_types TO user1;
+ПОМИЛКА:  схема "wood_types" не існує
+lab1_wood=# GRANT USAGE ON SCHEMA wood_characteristics TO user1;
+ПОМИЛКА:  схема "wood_characteristics" не існує
+lab1_wood=# GRANT SELECT ON ALL TABLES IN SCHEMA wood_characteristics TO user1;
+ПОМИЛКА:  схема "wood_characteristics" не існує
+lab1_wood=# GRANT ALL ON DATABASE lab1_wood TO user2;
+GRANT
+lab1_wood=# \c lab1_wood user2;
+Пароль користувача user2:
+Ви тепер під'єднані до бази даних "lab1_wood" як користувач "user2".
+lab1_wood=> \i d:/wood_tables.sql;
+
+
+postgres=> \c postgres postgres;
+Пароль користувача postgres:
+Ви тепер під'єднані до бази даних "postgres" як користувач "postgres".
+postgres=# GRANT CREATE ON SCHEMA public TO user2;
+GRANT
+postgres=# \c lab1_wood user2;
+Пароль користувача user2:
+Ви тепер під'єднані до бази даних "lab1_wood" як користувач "user2".
+
+lab1_wood=> \i d:/wood_tables.sql;
+CREATE TABLE
+CREATE TABLE
+ALTER TABLE
+INSERT 0 3
+lab1_wood=> GRANT USAGE ON SCHEMA public TO user1;
+ПОПЕРЕДЖЕННЯ:  для "public" не призначено ніяких прав
+GRANT
+lab1_wood=> GRANT SELECT ON ALL TABLES IN SCHEMA public TO user1;
+GRANT
+lab1_wood=>
+lab1_wood=> GRANT ALL PRIVILEGES ON SCHEMA public TO user2;
+ПОПЕРЕДЖЕННЯ:  для "public" не призначено ніяких прав
+GRANT
+lab1_wood=> \dt
+                 Список відношень
+ Схема  |        Назва         |   Тип   | Власник
+--------+----------------------+---------+---------
+ public | wood_characteristics | таблиця | user2
+ public | wood_types           | таблиця | user2
+(2 рядки)
+
+
+lab1_wood=> ALTER TABLE "wood_types" ADD FOREIGN KEY ("wood_id") REFERENCES "wood_characteristics" ("wood_id");
+ALTER TABLE
+lab1_wood=> \dt
+                 Список відношень
+ Схема  |        Назва         |   Тип   | Власник
+--------+----------------------+---------+---------
+ public | wood_characteristics | таблиця | user2
+ public | wood_types           | таблиця | user2
+(2 рядки)
+
+
+lab1_wood=> \d wood_types
+                              Таблиця "public.wood_types"
+    Стовпець     |          Тип           | Сортування | Обнуляється | За замовчуванням
+-----------------+------------------------+------------+-------------+------------------
+ wood_id         | integer                |            | not null    |
+ name            | character varying(100) |            | not null    |
+ scientific_name | character varying(100) |            |             |
+ common_uses     | text                   |            |             |
+ image_url       | character varying(255) |            |             |
+Індекси:
+    "wood_types_pkey" PRIMARY KEY, btree (wood_id)
+Обмеження зовнішнього ключа:
+    "wood_types_wood_id_fkey" FOREIGN KEY (wood_id) REFERENCES wood_characteristics(wood_id)
+    "wood_types_wood_id_fkey1" FOREIGN KEY (wood_id) REFERENCES wood_characteristics(wood_id)
+
+
+lab1_wood=> \d wood_characteristics
+                     Таблиця "public.wood_characteristics"
+ Стовпець |          Тип          | Сортування | Обнуляється | За замовчуванням
+----------+-----------------------+------------+-------------+------------------
+ wood_id  | integer               |            | not null    |
+ density  | numeric(10,2)         |            |             |
+ hardness | character varying(50) |            |             |
+ color    | character varying(50) |            |             |
+Індекси:
+    "wood_characteristics_pkey" PRIMARY KEY, btree (wood_id)
+Посилання ззовні:
+    TABLE "wood_types" CONSTRAINT "wood_types_wood_id_fkey" FOREIGN KEY (wood_id) REFERENCES wood_characteristics(wood_id)
+    TABLE "wood_types" CONSTRAINT "wood_types_wood_id_fkey1" FOREIGN KEY (wood_id) REFERENCES wood_characteristics(wood_id)
+
+
+lab1_wood=> INSERT INTO "wood_types" ("wood_id", "name", "scientific_name", "common_uses", "image_url")
+lab1_wood-> VALUES (1, 'Oak', 'Quercus', 'Furniture, Flooring, Cabinetry', 'https://example.com/oak.jpg'),
+lab1_wood->        (2, 'Maple', 'Acer', 'Furniture, Flooring, Musical Instruments', 'https://example.com/maple.jpg'),
+lab1_wood->        (3, 'Mahogany', 'Swietenia', 'Furniture, Boatbuilding, Musical Instruments', 'https://example.com/mahogany.jpg');
+INSERT 0 3
+lab1_wood=> INSERT INTO "wood_characteristics" ("wood_id", "density", "hardness", "color")
+lab1_wood-> VALUES (1, 0.75, 'Hard', 'Brown'),
+lab1_wood->        (2, 0.6, 'Medium', 'Light Brown'),
+lab1_wood->        (3, 0.55, 'Hard', 'Reddish Brown');
+ПОМИЛКА:  повторювані значення ключа порушують обмеження унікальності "wood_characteristics_pkey"
+ДЕТАЛІ:   Ключ (wood_id)=(1) вже існує.
+lab1_wood=> INSERT INTO "wood_characteristics" ("wood_id", "density", "hardness", "color")
+lab1_wood-> VALUES (4, 0.75, 'Hard', 'Brown'),
+lab1_wood->        (5, 0.6, 'Medium', 'Light Brown'),
+lab1_wood->        (6, 0.55, 'Hard', 'Reddish Brown');
+INSERT 0 3
+lab1_wood=> SELECT * FROM wood_types;
+ wood_id |   name   | scientific_name |                 common_uses                  |            image_url
+---------+----------+-----------------+----------------------------------------------+----------------------------------
+       1 | Oak      | Quercus         | Furniture, Flooring, Cabinetry               | https://example.com/oak.jpg
+       2 | Maple    | Acer            | Furniture, Flooring, Musical Instruments     | https://example.com/maple.jpg
+       3 | Mahogany | Swietenia       | Furniture, Boatbuilding, Musical Instruments | https://example.com/mahogany.jpg
+(3 рядки)
+
+
+lab1_wood=> SELECT * FROM wood_characteristics;
+ wood_id | density | hardness |     color
+---------+---------+----------+---------------
+       1 |    0.75 | Hard     | Brown
+       2 |    0.60 | Medium   | Light Brown
+       3 |    0.55 | Hard     | Reddish Brown
+       4 |    0.75 | Hard     | Brown
+       5 |    0.60 | Medium   | Light Brown
+       6 |    0.55 | Hard     | Reddish Brown
+(6 рядків)
+
+
+lab1_wood=>
+
+
+                     
