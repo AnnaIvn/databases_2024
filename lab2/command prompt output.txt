@@ -1,0 +1,601 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Пароль користувача postgres:
+psql (16.1)
+УВАГА: Кодова стор?нка консол? (866) в?др?зняється в?д кодової стор?нки Windows (1251)
+         8-б?тов? символи можуть працювати неправильно. Детальн?ше у розд?л?
+         "Нотатки для користувач?в Windows" у документац?ї psql.
+Введ?ть "help", щоб отримати допомогу.
+
+postgres=# \i d:/pre.sql;
+Active code page: 1251
+                                                       Список баз даних
+ Назва | Власник | Кодування | Постачальник локалі | Порядок сортування | Ctype | Локалізація ICU | ICU Rules | Права доступу
+-------+---------+-----------+---------------------+--------------------+-------+-----------------+-----------+---------------
+(0 рядків)
+
+
+psql:d:/pre.sql:2: попередження: \l: зайвий аргумент "to" проігноровано
+psql:d:/pre.sql:2: попередження: \l: зайвий аргумент "see" проігноровано
+psql:d:/pre.sql:2: попередження: \l: зайвий аргумент "list" проігноровано
+psql:d:/pre.sql:2: попередження: \l: зайвий аргумент "of" проігноровано
+psql:d:/pre.sql:2: попередження: \l: зайвий аргумент "existing" проігноровано
+psql:d:/pre.sql:2: попередження: \l: зайвий аргумент "databases" проігноровано
+psql:d:/pre.sql:3: ПОМИЛКА:  синтаксична помилка в або поблизу "psql"
+РЯДОК 1: psql
+         ^
+                                                                        Список баз даних
+   Назва   | Власник  | Кодування | Постачальник локалі |   Порядок сортування   |         Ctype          | Локалізація ICU | ICU Rules |     Права доступу
+-----------+----------+-----------+---------------------+------------------------+------------------------+-----------------+-----------+-----------------------
+ dvdrental | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           |
+ lab1_wood | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           |
+ postgres  | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           |
+ template0 | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           | =c/postgres          +
+           |          |           |                     |                        |                        |                 |           | postgres=CTc/postgres
+ template1 | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           | =c/postgres          +
+           |          |           |                     |                        |                        |                 |           | postgres=CTc/postgres
+(5 рядків)
+
+
+     Список ролей
+ Ім'я ролі | Атрибути
+-----------+----------
+
+                                      Список ролей
+ Ім'я ролі |                                  Атрибути
+-----------+----------------------------------------------------------------------------
+ postgres  | Суперкористувач, Створити роль, Створити базу даних, Реплікація, Обхід RLC
+ user1     |
+ user2     |
+
+
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Пароль користувача postgres:
+psql (16.1)
+УВАГА: Кодова стор?нка консол? (866) в?др?зняється в?д кодової стор?нки Windows (1251)
+         8-б?тов? символи можуть працювати неправильно. Детальн?ше у розд?л?
+         "Нотатки для користувач?в Windows" у документац?ї psql.
+Введ?ть "help", щоб отримати допомогу.
+
+postgres=# psql \! chcp 1251
+Active code page: 1251
+postgres-# /l
+postgres-# \l
+                                                                        Список баз даних
+   Назва   | Власник  | Кодування | Постачальник локалі |   Порядок сортування   |         Ctype          | Локалізація ICU | ICU Rules |     Права доступу
+-----------+----------+-----------+---------------------+------------------------+------------------------+-----------------+-----------+-----------------------
+ dvdrental | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           |
+ lab1_wood | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           |
+ postgres  | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           |
+ template0 | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           | =c/postgres          +
+           |          |           |                     |                        |                        |                 |           | postgres=CTc/postgres
+ template1 | postgres | UTF8      | libc                | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |                 |           | =c/postgres          +
+           |          |           |                     |                        |                        |                 |           | postgres=CTc/postgres
+(5 рядків)
+
+
+postgres-# \du
+                                      Список ролей
+ Ім'я ролі |                                  Атрибути
+-----------+----------------------------------------------------------------------------
+ postgres  | Суперкористувач, Створити роль, Створити базу даних, Реплікація, Обхід RLC
+ user1     |
+ user2     |
+
+
+postgres-# \c lab1_wood;
+Ви тепер під'єднані до бази даних "lab1_wood" як користувач "postgres".
+lab1_wood-# GRANT USAGE ON SCHEMA wood_types TO user1;
+ПОМИЛКА:  синтаксична помилка в або поблизу "psql"
+РЯДОК 1: psql
+         ^
+lab1_wood=# GRANT SELECT ON ALL TABLES IN SCHEMA wood_types TO user1;
+ПОМИЛКА:  схема "wood_types" не існує
+lab1_wood=# GRANT USAGE ON SCHEMA wood_characteristics TO user1;
+ПОМИЛКА:  схема "wood_characteristics" не існує
+lab1_wood=# GRANT SELECT ON ALL TABLES IN SCHEMA wood_characteristics TO user1;
+ПОМИЛКА:  схема "wood_characteristics" не існує
+lab1_wood=# GRANT ALL ON DATABASE lab1_wood TO user2;
+GRANT
+lab1_wood=# \c lab1_wood user2;
+Пароль користувача user2:
+Ви тепер під'єднані до бази даних "lab1_wood" як користувач "user2".
+lab1_wood=> \i d:/wood_tables.sql;
+
+
+postgres=> \c postgres postgres;
+Пароль користувача postgres:
+Ви тепер під'єднані до бази даних "postgres" як користувач "postgres".
+postgres=# GRANT CREATE ON SCHEMA public TO user2;
+GRANT
+postgres=# \c lab1_wood user2;
+Пароль користувача user2:
+Ви тепер під'єднані до бази даних "lab1_wood" як користувач "user2".
+
+lab1_wood=> \i d:/wood_tables.sql;
+CREATE TABLE
+CREATE TABLE
+ALTER TABLE
+INSERT 0 3
+lab1_wood=> GRANT USAGE ON SCHEMA public TO user1;
+ПОПЕРЕДЖЕННЯ:  для "public" не призначено ніяких прав
+GRANT
+lab1_wood=> GRANT SELECT ON ALL TABLES IN SCHEMA public TO user1;
+GRANT
+lab1_wood=>
+lab1_wood=> GRANT ALL PRIVILEGES ON SCHEMA public TO user2;
+ПОПЕРЕДЖЕННЯ:  для "public" не призначено ніяких прав
+GRANT
+lab1_wood=> \dt
+                 Список відношень
+ Схема  |        Назва         |   Тип   | Власник
+--------+----------------------+---------+---------
+ public | wood_characteristics | таблиця | user2
+ public | wood_types           | таблиця | user2
+(2 рядки)
+
+
+lab1_wood=> ALTER TABLE "wood_types" ADD FOREIGN KEY ("wood_id") REFERENCES "wood_characteristics" ("wood_id");
+ALTER TABLE
+lab1_wood=> \dt
+                 Список відношень
+ Схема  |        Назва         |   Тип   | Власник
+--------+----------------------+---------+---------
+ public | wood_characteristics | таблиця | user2
+ public | wood_types           | таблиця | user2
+(2 рядки)
+
+
+lab1_wood=> \d wood_types
+                              Таблиця "public.wood_types"
+    Стовпець     |          Тип           | Сортування | Обнуляється | За замовчуванням
+-----------------+------------------------+------------+-------------+------------------
+ wood_id         | integer                |            | not null    |
+ name            | character varying(100) |            | not null    |
+ scientific_name | character varying(100) |            |             |
+ common_uses     | text                   |            |             |
+ image_url       | character varying(255) |            |             |
+Індекси:
+    "wood_types_pkey" PRIMARY KEY, btree (wood_id)
+Обмеження зовнішнього ключа:
+    "wood_types_wood_id_fkey" FOREIGN KEY (wood_id) REFERENCES wood_characteristics(wood_id)
+    "wood_types_wood_id_fkey1" FOREIGN KEY (wood_id) REFERENCES wood_characteristics(wood_id)
+
+
+lab1_wood=> \d wood_characteristics
+                     Таблиця "public.wood_characteristics"
+ Стовпець |          Тип          | Сортування | Обнуляється | За замовчуванням
+----------+-----------------------+------------+-------------+------------------
+ wood_id  | integer               |            | not null    |
+ density  | numeric(10,2)         |            |             |
+ hardness | character varying(50) |            |             |
+ color    | character varying(50) |            |             |
+Індекси:
+    "wood_characteristics_pkey" PRIMARY KEY, btree (wood_id)
+Посилання ззовні:
+    TABLE "wood_types" CONSTRAINT "wood_types_wood_id_fkey" FOREIGN KEY (wood_id) REFERENCES wood_characteristics(wood_id)
+    TABLE "wood_types" CONSTRAINT "wood_types_wood_id_fkey1" FOREIGN KEY (wood_id) REFERENCES wood_characteristics(wood_id)
+
+
+lab1_wood=> INSERT INTO "wood_types" ("wood_id", "name", "scientific_name", "common_uses", "image_url")
+lab1_wood-> VALUES (1, 'Oak', 'Quercus', 'Furniture, Flooring, Cabinetry', 'https://example.com/oak.jpg'),
+lab1_wood->        (2, 'Maple', 'Acer', 'Furniture, Flooring, Musical Instruments', 'https://example.com/maple.jpg'),
+lab1_wood->        (3, 'Mahogany', 'Swietenia', 'Furniture, Boatbuilding, Musical Instruments', 'https://example.com/mahogany.jpg');
+INSERT 0 3
+lab1_wood=> INSERT INTO "wood_characteristics" ("wood_id", "density", "hardness", "color")
+lab1_wood-> VALUES (1, 0.75, 'Hard', 'Brown'),
+lab1_wood->        (2, 0.6, 'Medium', 'Light Brown'),
+lab1_wood->        (3, 0.55, 'Hard', 'Reddish Brown');
+ПОМИЛКА:  повторювані значення ключа порушують обмеження унікальності "wood_characteristics_pkey"
+ДЕТАЛІ:   Ключ (wood_id)=(1) вже існує.
+lab1_wood=> INSERT INTO "wood_characteristics" ("wood_id", "density", "hardness", "color")
+lab1_wood-> VALUES (4, 0.75, 'Hard', 'Brown'),
+lab1_wood->        (5, 0.6, 'Medium', 'Light Brown'),
+lab1_wood->        (6, 0.55, 'Hard', 'Reddish Brown');
+INSERT 0 3
+lab1_wood=> SELECT * FROM wood_types;
+ wood_id |   name   | scientific_name |                 common_uses                  |            image_url
+---------+----------+-----------------+----------------------------------------------+----------------------------------
+       1 | Oak      | Quercus         | Furniture, Flooring, Cabinetry               | https://example.com/oak.jpg
+       2 | Maple    | Acer            | Furniture, Flooring, Musical Instruments     | https://example.com/maple.jpg
+       3 | Mahogany | Swietenia       | Furniture, Boatbuilding, Musical Instruments | https://example.com/mahogany.jpg
+(3 рядки)
+
+
+lab1_wood=> SELECT * FROM wood_characteristics;
+ wood_id | density | hardness |     color
+---------+---------+----------+---------------
+       1 |    0.75 | Hard     | Brown
+       2 |    0.60 | Medium   | Light Brown
+       3 |    0.55 | Hard     | Reddish Brown
+       4 |    0.75 | Hard     | Brown
+       5 |    0.60 | Medium   | Light Brown
+       6 |    0.55 | Hard     | Reddish Brown
+(6 рядків)
+
+
+lab1_wood=>
+
+
+
+
+____________________________________________________________________________________________________
+
+
+
+
+
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Пароль користувача postgres:
+psql (16.1)
+УВАГА: Кодова стор?нка консол? (866) в?др?зняється в?д кодової стор?нки Windows (1251)
+         8-б?тов? символи можуть працювати неправильно. Детальн?ше у розд?л?
+         "Нотатки для користувач?в Windows" у документац?ї psql.
+Введ?ть "help", щоб отримати допомогу.
+
+postgres=# psql \! chcp 1251
+Active code page: 1251
+postgres-# \c lab1_wood user2;
+Пароль користувача user2:
+Ви тепер під'єднані до бази даних "lab1_wood" як користувач "user2".
+lab1_wood-> \dt
+                 Список відношень
+ Схема  |        Назва         |   Тип   | Власник
+--------+----------------------+---------+---------
+ public | wood_characteristics | таблиця | user2
+ public | wood_types           | таблиця | user2
+(2 рядки)
+
+
+lab1_wood-> DROP TABLE wood_types
+lab1_wood-> DROP TABLE wood_characteristics
+lab1_wood-> \dt
+                 Список відношень
+ Схема  |        Назва         |   Тип   | Власник
+--------+----------------------+---------+---------
+ public | wood_characteristics | таблиця | user2
+ public | wood_types           | таблиця | user2
+(2 рядки)
+
+
+lab1_wood-> DROP TABLE wood_types;
+ПОМИЛКА:  синтаксична помилка в або поблизу "psql"
+РЯДОК 1: psql
+         ^
+lab1_wood=> DROP TABLE "wood_types";
+DROP TABLE
+lab1_wood=> DROP TABLE "wood_characteristics";
+DROP TABLE
+lab1_wood=> \dt
+Не знайдено жодного відношення.
+lab1_wood=> CREATE TABLE wood_suppliers (
+lab1_wood(>   "id" SERIAL PRIMARY KEY,
+lab1_wood(>   "supplier_id" INT,
+lab1_wood(>   "supplier_name" VARCHAR(100),
+lab1_wood(>   "contact_info" TEXT
+lab1_wood(> );
+CREATE TABLE
+lab1_wood=> CREATE TABLE "wood_characteristics" (
+lab1_wood(>   "id" SERIAL PRIMARY KEY,
+lab1_wood(>   "density" DECIMAL(10,2),
+lab1_wood(>   "hardness" VARCHAR(50),
+lab1_wood(>   "color" VARCHAR(50),
+lab1_wood(>   "char_id" INT REFERENCES "wood_suppliers" ("id"),
+lab1_wood(>   UNIQUE("type_id")
+lab1_wood(> );
+ПОМИЛКА:  вказаний у ключі стовпець "type_id" не існує
+РЯДОК 7:   UNIQUE("type_id")
+           ^
+lab1_wood=> DROP TABLE "wood_characteristics";
+ПОМИЛКА:  таблиця "wood_characteristics" не існує
+lab1_wood=> CREATE TABLE "wood_characteristics" (
+lab1_wood(>   "id" SERIAL PRIMARY KEY,
+lab1_wood(>   "density" DECIMAL(10,2),
+lab1_wood(>   "hardness" VARCHAR(50),
+lab1_wood(>   "color" VARCHAR(50),
+lab1_wood(>   "char_id" INT REFERENCES "wood_suppliers" ("id"),
+lab1_wood(>   UNIQUE("char_id")
+lab1_wood(> );
+CREATE TABLE
+lab1_wood=> CREATE TABLE "wood_types" (
+lab1_wood(>   "id" SERIAL PRIMARY KEY,
+lab1_wood(>   "name" VARCHAR(100) NOT NULL,
+lab1_wood(>   "scientific_name" VARCHAR(100),
+lab1_wood(>   "common_uses" TEXT,
+lab1_wood(>   "image_url" VARCHAR(255),
+lab1_wood(>   "type_id" INT REFERENCES "wood_characteristics" ("id"),
+lab1_wood(>   UNIQUE("type_id")
+lab1_wood(> );
+CREATE TABLE
+lab1_wood=>
+lab1_wood=> \dt
+                 Список відношень
+ Схема  |        Назва         |   Тип   | Власник
+--------+----------------------+---------+---------
+ public | wood_characteristics | таблиця | user2
+ public | wood_suppliers       | таблиця | user2
+ public | wood_types           | таблиця | user2
+(3 рядки)
+
+
+lab1_wood=> \d wood_types
+                                         Таблиця "public.wood_types"
+    Стовпець     |          Тип           | Сортування | Обнуляється |            За замовчуванням
+-----------------+------------------------+------------+-------------+----------------------------------------
+ id              | integer                |            | not null    | nextval('wood_types_id_seq'::regclass)
+ name            | character varying(100) |            | not null    |
+ scientific_name | character varying(100) |            |             |
+ common_uses     | text                   |            |             |
+ image_url       | character varying(255) |            |             |
+ type_id         | integer                |            |             |
+Індекси:
+    "wood_types_pkey" PRIMARY KEY, btree (id)
+    "wood_types_type_id_key" UNIQUE CONSTRAINT, btree (type_id)
+Обмеження зовнішнього ключа:
+    "wood_types_type_id_fkey" FOREIGN KEY (type_id) REFERENCES wood_characteristics(id)
+
+
+lab1_wood=> \d wood_characteristics
+                                     Таблиця "public.wood_characteristics"
+ Стовпець |          Тип          | Сортування | Обнуляється |                 За замовчуванням
+----------+-----------------------+------------+-------------+--------------------------------------------------
+ id       | integer               |            | not null    | nextval('wood_characteristics_id_seq'::regclass)
+ density  | numeric(10,2)         |            |             |
+ hardness | character varying(50) |            |             |
+ color    | character varying(50) |            |             |
+ char_id  | integer               |            |             |
+Індекси:
+    "wood_characteristics_pkey" PRIMARY KEY, btree (id)
+    "wood_characteristics_char_id_key" UNIQUE CONSTRAINT, btree (char_id)
+Обмеження зовнішнього ключа:
+    "wood_characteristics_char_id_fkey" FOREIGN KEY (char_id) REFERENCES wood_suppliers(id)
+Посилання ззовні:
+    TABLE "wood_types" CONSTRAINT "wood_types_type_id_fkey" FOREIGN KEY (type_id) REFERENCES wood_characteristics(id)
+
+
+lab1_wood=> \d wood_suppliers
+                                        Таблиця "public.wood_suppliers"
+   Стовпець    |          Тип           | Сортування | Обнуляється |              За замовчуванням
+---------------+------------------------+------------+-------------+--------------------------------------------
+ id            | integer                |            | not null    | nextval('wood_suppliers_id_seq'::regclass)
+ supplier_id   | integer                |            |             |
+ supplier_name | character varying(100) |            |             |
+ contact_info  | text                   |            |             |
+Індекси:
+    "wood_suppliers_pkey" PRIMARY KEY, btree (id)
+Посилання ззовні:
+    TABLE "wood_characteristics" CONSTRAINT "wood_characteristics_char_id_fkey" FOREIGN KEY (char_id) REFERENCES wood_suppliers(id)
+
+
+lab1_wood=>
+
+
+
+
+
+lab1_wood=> INSERT INTO wood_types ("name", "scientific_name", "common_uses", "image_url")
+lab1_wood-> VALUES
+lab1_wood->   ('Oak', 'Quercus', 'Furniture, Flooring', 'oak.jpg'),
+lab1_wood->   ('Pine', 'Pinus', 'Construction, Furniture', 'pine.jpg'),
+lab1_wood->   ('Mahogany', 'Swietenia', 'Furniture, Musical Instruments', 'mahogany.jpg');
+INSERT 0 3
+lab1_wood=>   SELECT * FROM wood_types;
+ id |   name   | scientific_name |          common_uses           |  image_url   | type_id
+----+----------+-----------------+--------------------------------+--------------+---------
+  4 | Oak      | Quercus         | Furniture, Flooring            | oak.jpg      |
+  5 | Pine     | Pinus           | Construction, Furniture        | pine.jpg     |
+  6 | Mahogany | Swietenia       | Furniture, Musical Instruments | mahogany.jpg |
+(3 рядки)
+
+
+lab1_wood=> INSERT INTO "wood_characteristics" ("density", "hardness", "color")
+lab1_wood-> VALUES
+lab1_wood->   (0.75, 'Hard', 'Brown'),
+lab1_wood->   (0.6, 'Medium', 'Light Brown'),
+lab1_wood->   (0.55, 'Hard', 'Reddish Brown');
+INSERT 0 3
+lab1_wood=> SELECT * FROM wood_characteristics;
+ id | density | hardness |     color     | char_id
+----+---------+----------+---------------+---------
+  1 |    0.75 | Hard     | Brown         |
+  2 |    0.60 | Medium   | Light Brown   |
+  3 |    0.55 | Hard     | Reddish Brown |
+(3 рядки)
+
+
+lab1_wood=> INSERT INTO wood_suppliers ("supplier_id", "supplier_name", "contact_info")
+lab1_wood-> VALUES
+lab1_wood->   (1, 'Wood Supplier Adam', 'Contact info for Wood Supplier Adam'),
+lab1_wood->   (2, 'Wood Supplier Bob', 'Contact info for Wood Supplier Bob'),
+lab1_wood->   (3, 'Wood Supplier Casy', 'Contact info for Wood Supplier Casy');
+INSERT 0 3
+lab1_wood=>
+lab1_wood=> SELECT * FROM wood_suppliers;
+ id | supplier_id |   supplier_name    |            contact_info
+----+-------------+--------------------+-------------------------------------
+  1 |           1 | Wood Supplier Adam | Contact info for Wood Supplier Adam
+  2 |           2 | Wood Supplier Bob  | Contact info for Wood Supplier Bob
+  3 |           3 | Wood Supplier Casy | Contact info for Wood Supplier Casy
+(3 рядки)
+
+
+lab1_wood=>
+
+                     
+
+____________________________________________________________________________________________________
+THE FINAL 3 TABLES WITH ONE-TO-ONE AND ONE-TO-MANY CONNECTIONS
+
+
+
+
+lab1_wood=> DROP TABLE "wood_characteristics";
+ПОМИЛКА:  неможливо видалити таблиця wood_characteristics, тому що від нього залежать інші об'єкти
+ДЕТАЛІ:   обмеження wood_types_type_id_fkey на таблиця wood_types залежить від таблиця wood_characteristics
+ПІДКАЗКА:  Використайте DROP ... CASCADE для видалення залежних об'єктів також.
+lab1_wood=> DROP TABLE "wood_types";
+DROP TABLE
+lab1_wood=> DROP TABLE "wood_characteristics";
+DROP TABLE
+lab1_wood=> DROP TABLE "wood_suppliers";
+DROP TABLE
+lab1_wood=> \dt
+Не знайдено жодного відношення.
+lab1_wood=> CREATE TABLE "wood_suppliers" (
+lab1_wood(>   "id" SERIAL PRIMARY KEY,
+lab1_wood(>   "supplier_id" INT,
+lab1_wood(>   "supplier_name" VARCHAR(100),
+lab1_wood(>   "contact_info" TEXT
+lab1_wood(> );
+CREATE TABLE
+lab1_wood=> CREATE TABLE "wood_characteristics" (
+lab1_wood(>   "id" SERIAL PRIMARY KEY,
+lab1_wood(>   "density" DECIMAL(10,2),
+lab1_wood(>   "hardness" VARCHAR(50),
+lab1_wood(>   "color" VARCHAR(50),
+lab1_wood(> );
+ПОМИЛКА:  синтаксична помилка в або поблизу ")"
+РЯДОК 6: );
+         ^
+lab1_wood=> CREATE TABLE "wood_characteristics" (
+lab1_wood(>   "id" SERIAL PRIMARY KEY,
+lab1_wood(>   "density" DECIMAL(10,2),
+lab1_wood(>   "hardness" VARCHAR(50),
+lab1_wood(>   "color" VARCHAR(50)
+lab1_wood(> );
+CREATE TABLE
+lab1_wood=> CREATE TABLE "wood_types" (
+lab1_wood(>   "id" SERIAL PRIMARY KEY,
+lab1_wood(>   "name" VARCHAR(100) NOT NULL,
+lab1_wood(>   "scientific_name" VARCHAR(100),
+lab1_wood(>   "common_uses" TEXT,
+lab1_wood(>   "image_url" VARCHAR(255),
+lab1_wood(>   "char_id" INT UNIQUE REFERENCES "wood_characteristics" ("id"),
+lab1_wood(>   "sup_id" INT REFERENCES "wood_suppliers" ("id")
+lab1_wood(> );
+CREATE TABLE
+lab1_wood=> \dt
+                 Список відношень
+ Схема  |        Назва         |   Тип   | Власник
+--------+----------------------+---------+---------
+ public | wood_characteristics | таблиця | user2
+ public | wood_suppliers       | таблиця | user2
+ public | wood_types           | таблиця | user2
+(3 рядки)
+
+
+lab1_wood=> \d wood_types
+                                         Таблиця "public.wood_types"
+    Стовпець     |          Тип           | Сортування | Обнуляється |            За замовчуванням
+-----------------+------------------------+------------+-------------+----------------------------------------
+ id              | integer                |            | not null    | nextval('wood_types_id_seq'::regclass)
+ name            | character varying(100) |            | not null    |
+ scientific_name | character varying(100) |            |             |
+ common_uses     | text                   |            |             |
+ image_url       | character varying(255) |            |             |
+ char_id         | integer                |            |             |
+ sup_id          | integer                |            |             |
+Індекси:
+    "wood_types_pkey" PRIMARY KEY, btree (id)
+    "wood_types_char_id_key" UNIQUE CONSTRAINT, btree (char_id)
+Обмеження зовнішнього ключа:
+    "wood_types_char_id_fkey" FOREIGN KEY (char_id) REFERENCES wood_characteristics(id)
+    "wood_types_sup_id_fkey" FOREIGN KEY (sup_id) REFERENCES wood_suppliers(id)
+
+
+lab1_wood=> \d wood_characteristics
+                                     Таблиця "public.wood_characteristics"
+ Стовпець |          Тип          | Сортування | Обнуляється |                 За замовчуванням
+----------+-----------------------+------------+-------------+--------------------------------------------------
+ id       | integer               |            | not null    | nextval('wood_characteristics_id_seq'::regclass)
+ density  | numeric(10,2)         |            |             |
+ hardness | character varying(50) |            |             |
+ color    | character varying(50) |            |             |
+Індекси:
+    "wood_characteristics_pkey" PRIMARY KEY, btree (id)
+Посилання ззовні:
+    TABLE "wood_types" CONSTRAINT "wood_types_char_id_fkey" FOREIGN KEY (char_id) REFERENCES wood_characteristics(id)
+
+
+lab1_wood=> \d wood_suppliers
+                                        Таблиця "public.wood_suppliers"
+   Стовпець    |          Тип           | Сортування | Обнуляється |              За замовчуванням
+---------------+------------------------+------------+-------------+--------------------------------------------
+ id            | integer                |            | not null    | nextval('wood_suppliers_id_seq'::regclass)
+ supplier_id   | integer                |            |             |
+ supplier_name | character varying(100) |            |             |
+ contact_info  | text                   |            |             |
+Індекси:
+    "wood_suppliers_pkey" PRIMARY KEY, btree (id)
+Посилання ззовні:
+    TABLE "wood_types" CONSTRAINT "wood_types_sup_id_fkey" FOREIGN KEY (sup_id) REFERENCES wood_suppliers(id)
+
+
+lab1_wood=> INSERT INTO wood_suppliers ("supplier_id", "supplier_name", "contact_info")
+lab1_wood-> VALUES
+lab1_wood->   (1, 'Wood Supplier Adam', 'Contact info for Wood Supplier Adam'),
+lab1_wood->   (2, 'Wood Supplier Bob', 'Contact info for Wood Supplier Bob'),
+lab1_wood->   (3, 'Wood Supplier Casy', 'Contact info for Wood Supplier Casy');
+INSERT 0 3
+lab1_wood=> SELECT * FROM wood_suppliers;
+ id | supplier_id |   supplier_name    |            contact_info
+----+-------------+--------------------+-------------------------------------
+  1 |           1 | Wood Supplier Adam | Contact info for Wood Supplier Adam
+  2 |           2 | Wood Supplier Bob  | Contact info for Wood Supplier Bob
+  3 |           3 | Wood Supplier Casy | Contact info for Wood Supplier Casy
+(3 рядки)
+
+
+lab1_wood=> INSERT INTO "wood_characteristics" ("density", "hardness", "color")
+lab1_wood-> VALUES
+lab1_wood->   (0.75, 'Hard', 'Brown'),
+lab1_wood->   (0.6, 'Medium', 'Light Brown'),
+lab1_wood->   (0.55, 'Hard', 'Reddish Brown');
+INSERT 0 3
+lab1_wood=> SELECT * FROM wood_characteristics;
+ id | density | hardness |     color
+----+---------+----------+---------------
+  1 |    0.75 | Hard     | Brown
+  2 |    0.60 | Medium   | Light Brown
+  3 |    0.55 | Hard     | Reddish Brown
+(3 рядки)
+
+
+lab1_wood=> INSERT INTO wood_types ("name", "scientific_name", "common_uses", "image_url", "char_id", "sup_id")
+lab1_wood-> VALUES
+lab1_wood->   ('Oak', 'Quercus', 'Furniture, Flooring', 'oak.jpg', 1, 1),
+lab1_wood->   ('Pine', 'Pinus', 'Construction, Furniture', 'pine.jpg', 2, 1),
+lab1_wood->   ('Mahogany', 'Swietenia', 'Furniture, Musical Instruments', 'mahogany.jpg', 3, 3);
+INSERT 0 3
+lab1_wood=> SELECT * FROM wood_types;
+ id |   name   | scientific_name |          common_uses           |  image_url   | char_id | sup_id
+----+----------+-----------------+--------------------------------+--------------+---------+--------
+  1 | Oak      | Quercus         | Furniture, Flooring            | oak.jpg      |       1 |      1
+  2 | Pine     | Pinus           | Construction, Furniture        | pine.jpg     |       2 |      1
+  3 | Mahogany | Swietenia       | Furniture, Musical Instruments | mahogany.jpg |       3 |      3
+(3 рядки)
+
+
+lab1_wood=>
+
+
+lab1_wood=> SELECT w.name, s.supplier_name
+lab1_wood-> FROM wood_suppliers AS s
+lab1_wood-> JOIN wood_types w ON s.id=w.sup_id;
+   name   |   supplier_name
+----------+--------------------
+ Pine     | Wood Supplier Adam
+ Oak      | Wood Supplier Adam
+ Mahogany | Wood Supplier Casy
+(3 рядки)
+
+
+lab1_wood=>
