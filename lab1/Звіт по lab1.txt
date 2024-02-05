@@ -18,6 +18,8 @@
 доступу: user1-доступ перегляду public schemas та доступ перегляду інформації з таблиць в 
 public schemas, user2-all privileges for public schemas. 
 	В новій базі даних було створено дві таблиці з one-to-one зв'язком та внесено в них дані
+	Була додана ще одна таблиця wood_suppliers, і був встановлений зв'язок one-to-many з 
+таблицями wood_types та wood_suppliers
 
 Додатки:
 1. wood types dbdiagram.io .pdf - діаграма бази даних зроблені на сайті dbdiagram.io
