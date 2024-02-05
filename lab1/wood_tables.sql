@@ -34,19 +34,19 @@ CREATE TABLE "wood_types" (
 -- ALTER TABLE "wood_types" ADD FOREIGN KEY ("wood_id") REFERENCES "wood_characteristics" ("wood_id");
 
 -- insert data into wood_types table
-INSERT INTO wood_types ("name", "scientific_name", "common_uses", "image_url", "type_id")
+INSERT INTO wood_types ("name", "scientific_name", "common_uses", "image_url")
 VALUES
-  ('Oak', 'Quercus', 'Furniture, Flooring', 'oak.jpg', 1),
-  ('Pine', 'Pinus', 'Construction, Furniture', 'pine.jpg', 2),
-  ('Mahogany', 'Swietenia', 'Furniture, Musical Instruments', 'mahogany.jpg', 3);
+  ('Oak', 'Quercus', 'Furniture, Flooring', 'oak.jpg'),
+  ('Pine', 'Pinus', 'Construction, Furniture', 'pine.jpg'),
+  ('Mahogany', 'Swietenia', 'Furniture, Musical Instruments', 'mahogany.jpg');
 
 
 -- insert data into wood_characteristics table
-INSERT INTO "wood_characteristics" ("density", "hardness", "color", "char_id")
+INSERT INTO "wood_characteristics" ("density", "hardness", "color")
 VALUES
-  (0.75, 'Hard', 'Brown', 1),
-  (0.6, 'Medium', 'Light Brown', 2),
-  (0.55, 'Hard', 'Reddish Brown', 3);
+  (0.75, 'Hard', 'Brown'),
+  (0.6, 'Medium', 'Light Brown'),
+  (0.55, 'Hard', 'Reddish Brown');
 
 
 INSERT INTO wood_suppliers ("supplier_id", "supplier_name", "contact_info")

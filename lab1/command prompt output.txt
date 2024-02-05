@@ -377,4 +377,56 @@ lab1_wood=> \d wood_suppliers
 
 lab1_wood=>
 
+
+
+
+
+lab1_wood=> INSERT INTO wood_types ("name", "scientific_name", "common_uses", "image_url")
+lab1_wood-> VALUES
+lab1_wood->   ('Oak', 'Quercus', 'Furniture, Flooring', 'oak.jpg'),
+lab1_wood->   ('Pine', 'Pinus', 'Construction, Furniture', 'pine.jpg'),
+lab1_wood->   ('Mahogany', 'Swietenia', 'Furniture, Musical Instruments', 'mahogany.jpg');
+INSERT 0 3
+lab1_wood=>   SELECT * FROM wood_types;
+ id |   name   | scientific_name |          common_uses           |  image_url   | type_id
+----+----------+-----------------+--------------------------------+--------------+---------
+  4 | Oak      | Quercus         | Furniture, Flooring            | oak.jpg      |
+  5 | Pine     | Pinus           | Construction, Furniture        | pine.jpg     |
+  6 | Mahogany | Swietenia       | Furniture, Musical Instruments | mahogany.jpg |
+(3 рядки)
+
+
+lab1_wood=> INSERT INTO "wood_characteristics" ("density", "hardness", "color")
+lab1_wood-> VALUES
+lab1_wood->   (0.75, 'Hard', 'Brown'),
+lab1_wood->   (0.6, 'Medium', 'Light Brown'),
+lab1_wood->   (0.55, 'Hard', 'Reddish Brown');
+INSERT 0 3
+lab1_wood=> SELECT * FROM wood_characteristics;
+ id | density | hardness |     color     | char_id
+----+---------+----------+---------------+---------
+  1 |    0.75 | Hard     | Brown         |
+  2 |    0.60 | Medium   | Light Brown   |
+  3 |    0.55 | Hard     | Reddish Brown |
+(3 рядки)
+
+
+lab1_wood=> INSERT INTO wood_suppliers ("supplier_id", "supplier_name", "contact_info")
+lab1_wood-> VALUES
+lab1_wood->   (1, 'Wood Supplier Adam', 'Contact info for Wood Supplier Adam'),
+lab1_wood->   (2, 'Wood Supplier Bob', 'Contact info for Wood Supplier Bob'),
+lab1_wood->   (3, 'Wood Supplier Casy', 'Contact info for Wood Supplier Casy');
+INSERT 0 3
+lab1_wood=>
+lab1_wood=> SELECT * FROM wood_suppliers;
+ id | supplier_id |   supplier_name    |            contact_info
+----+-------------+--------------------+-------------------------------------
+  1 |           1 | Wood Supplier Adam | Contact info for Wood Supplier Adam
+  2 |           2 | Wood Supplier Bob  | Contact info for Wood Supplier Bob
+  3 |           3 | Wood Supplier Casy | Contact info for Wood Supplier Casy
+(3 рядки)
+
+
+lab1_wood=>
+
                      
