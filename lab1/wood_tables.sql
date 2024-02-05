@@ -34,22 +34,26 @@ CREATE TABLE "wood_types" (
 -- ALTER TABLE "wood_types" ADD FOREIGN KEY ("wood_id") REFERENCES "wood_characteristics" ("wood_id");
 
 -- insert data into wood_types table
-INSERT INTO "wood_types" ("wood_id", "name", "scientific_name", "common_uses", "image_url")
-VALUES (1, 'Oak', 'Quercus', 'Furniture, Flooring, Cabinetry', 'https://example.com/oak.jpg'),
-       (2, 'Maple', 'Acer', 'Furniture, Flooring, Musical Instruments', 'https://example.com/maple.jpg'),
-       (3, 'Mahogany', 'Swietenia', 'Furniture, Boatbuilding, Musical Instruments', 'https://example.com/mahogany.jpg');
+INSERT INTO wood_types ("name", "scientific_name", "common_uses", "image_url", "type_id")
+VALUES
+  ('Oak', 'Quercus', 'Furniture, Flooring', 'oak.jpg', 1),
+  ('Pine', 'Pinus', 'Construction, Furniture', 'pine.jpg', 2),
+  ('Mahogany', 'Swietenia', 'Furniture, Musical Instruments', 'mahogany.jpg', 3);
+
 
 -- insert data into wood_characteristics table
-INSERT INTO "wood_characteristics" ("wood_id", "density", "hardness", "color")
-VALUES (4, 0.75, 'Hard', 'Brown'),
-       (5, 0.6, 'Medium', 'Light Brown'),
-       (6, 0.55, 'Hard', 'Reddish Brown');
+INSERT INTO "wood_characteristics" ("density", "hardness", "color", "char_id")
+VALUES
+  (0.75, 'Hard', 'Brown', 1),
+  (0.6, 'Medium', 'Light Brown', 2),
+  (0.55, 'Hard', 'Reddish Brown', 3);
+
 
 INSERT INTO wood_suppliers ("supplier_id", "supplier_name", "contact_info")
 VALUES
-  (1, 'Wood Supplier A', 'Contact info for Wood Supplier A'),
-  (2, 'Wood Supplier B', 'Contact info for Wood Supplier B'),
-  (3, 'Wood Supplier C', 'Contact info for Wood Supplier C');
+  (1, 'Wood Supplier Adam', 'Contact info for Wood Supplier Adam'),
+  (2, 'Wood Supplier Bob', 'Contact info for Wood Supplier Bob'),
+  (3, 'Wood Supplier Casy', 'Contact info for Wood Supplier Casy');
 
 
 SELECT * FROM wood_types;
