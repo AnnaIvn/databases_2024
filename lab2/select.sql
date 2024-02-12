@@ -27,7 +27,7 @@ SELECT id, supplier_name FROM wood_suppliers;
 -- 5. Обрати певні стовпці з таблиці wood_types
 SELECT id, name FROM wood_types;
 
--- 6. Обрати певні стовпці з таблиці wood_types та вивести тільки ті, що мають певну назву в стовпці common_uses
+- 6. Обрати певні стовпці з таблиці wood_types та вивести тільки ті, що мають певну назву в стовпці common_uses
 SELECT name, common_uses FROM wood_types WHERE common_uses = 'Furniture, Flooring';
 
 -- 7. Обрати стовпці з таб. wood_characteristics + вивести тільки ті, що мають певне значення в стовпці hardness

@@ -1,36 +1,55 @@
 \dt   -- to see existing tables
 CREATE TABLE "wood_suppliers" (
   "id" SERIAL PRIMARY KEY,
-  "supplier_id" INT,
   "supplier_name" VARCHAR(100),
   "contact_info" TEXT
+);
+
+-- creating table hardness_char
+CREATE TABLE "hardness_char"(
+  "id" SERIAL PRIMARY KEY,
+  "hadness" VARCHAR(50)
 );
 
 -- creating table wood_characteristics
 CREATE TABLE "wood_characteristics" (
   "id" SERIAL PRIMARY KEY,
   "density" DECIMAL(10,2),
-  "hardness" VARCHAR(50),
+  "hardness_id" INT REFERENCE "hardness_char" ("id"),              -- one-to-many
   "color" VARCHAR(50)
 );
 
--- "char_id" INT REFERENCES "wood_suppliers" ("id"), 
-  -- UNIQUE("char_id")
+-- creating table common_uses
+CREATE TABLE "common_uses"(
+  "id" SERIAL PRIMARY KEY,
+  "common_uses" TEXT
+);
 
 -- creating table wood_types
 CREATE TABLE "wood_types" (
   "id" SERIAL PRIMARY KEY,
   "name" VARCHAR(100) NOT NULL,
   "scientific_name" VARCHAR(100),
-  "common_uses" TEXT,
   "image_url" VARCHAR(255),
+  "uses_id" INT REFERENCES "common_uses" ("id"),                   -- one-to-many
   "char_id" INT UNIQUE REFERENCES "wood_characteristics" ("id"),   -- one-to-one
-  "sup_id" INT REFERENCES "wood_suppliers" ("id")                  -- one-to-many
 );
+
+-- creating table woodtype_supplier
+CREATE TABLE "price"(  -- for many-to-many relationship
+  "id" SERIAL PRIMARY KEY,
+  "woodtype_id" INT REFERENCES "wood_types" ("id"),                
+  "supplier_id" INT REFERENCES "wood_suppliers" ("id"),
+  "supplier_price" DECIMAL(10,2),
+  "sup_date" DATE
+);
+
 \dt
 \d wood_types         -- to see contents of table
 \d wood_characteristics
 \d wood_suppliers
+\d hardness_char
+\d common_uses
 
 -- ALTER TABLE "wood_types" ADD FOREIGN KEY ("wood_id") REFERENCES "wood_characteristics" ("wood_id");
 
