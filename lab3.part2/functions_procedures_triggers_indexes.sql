@@ -173,6 +173,23 @@ CALL add_to_price_table(10, 888, '2024-03-07' , 11);
 SELECT * FROM price;
 
 
+-- Create the trigger that gives today date
+CREATE OR REPLACE FUNCTION trigger_add_to_price_table()
+RETURNS TRIGGER AS $$
+BEGIN
+    -- Call the procedure with today's date
+    PERFORM add_to_price_table(NEW.supplier_id, NEW.supplier_price, CURRENT_DATE, NEW.woodtype_id);
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Attach the trigger to the price table
+CREATE TRIGGER add_to_price_trigger
+AFTER INSERT ON price
+FOR EACH ROW
+EXECUTE FUNCTION trigger_add_to_price_table();
+
+
 -- delete price
 CREATE OR REPLACE PROCEDURE delete_from_price_table(
     v_price_id INT
